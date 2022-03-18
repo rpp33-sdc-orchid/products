@@ -1,0 +1,25 @@
+{
+  "name": "products",
+  "version": "1.0.0",
+  "description": "SDC project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpp33-sdc-orchid/products.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpp33-sdc-orchid/products/issues"
+  },
+  "homepage": "https://github.com/rpp33-sdc-orchid/products#readme",
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
+  },
+  "dependencies": {
+  }
+}
