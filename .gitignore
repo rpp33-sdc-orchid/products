@@ -81,6 +81,7 @@ typings/
 # Nuxt.js build / generate output
 .nuxt
 dist
+.DS_Store
 
 # Gatsby files
 .cache/
@@ -105,3 +106,7 @@ dist
 
 # Dependency directorys
 package-lock.json
+
+# Raw data
+.csv
+clean_data/

@@ -21,5 +21,7 @@
     "supertest": "^6.2.2"
   },
   "dependencies": {
+    "axios": "^0.26.1",
+    "nodemon": "^1.19.4"
   }
 }
