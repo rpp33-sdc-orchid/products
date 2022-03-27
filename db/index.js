@@ -10,7 +10,23 @@ const pool = new Pool({
   port: process.env.PGPORT || 5432
 });
 
-pool.query('SELECT NOW()', (err, res) => {
-  console.log(err, res);
-  pool.end();
+
+pool.on('error', (err, client) => {
+  console.error('Error acquiring pool:', err);
 });
+
+
+pool.connect((err, client, release) => {
+  if (err) {
+    return console.err('error acquiring client', err);
+  }
+  client.query('SELECT * FROM products LIMIT 10', (err, result) => {
+    release();
+    if (err) {
+      return console.log('error executing query', err);
+    }
+    console.log('results?', result.rows);
+  })
+});
+
+module.exports = pool;
