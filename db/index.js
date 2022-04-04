@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { pool } = require('pg');
+const { Pool } = require('pg');
 
 // pools will use environment variables for connection information
 const pool = new Pool({
@@ -18,14 +18,15 @@ pool.on('error', (err, client) => {
 
 pool.connect((err, client, release) => {
   if (err) {
-    return console.err('error acquiring client', err);
+    return console.log('error acquiring client', err);
   }
   client.query('SELECT * FROM products LIMIT 10', (err, result) => {
     release();
     if (err) {
       return console.log('error executing query', err);
     }
-    console.log('results?', result.rows);
+    // console.log('results?', result.rows);
+    console.log('success connection');
   })
 });
 
