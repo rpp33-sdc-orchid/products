@@ -46,7 +46,14 @@ describe('Test on API end points', () => {
     expect(result.status).toBe(200);
   });
 
-  //TODO: write get style test
+  test('should get styles from API', async () => {
+    const result = await request(app)
+      .get(`/products/${testProductId}/styles`)
+      // .set('Authorization', API_KEY)
+      .catch((err) => console.log('err on GET/products/:product_id/styles', err));
+
+    expect(result.status).toBe(200);
+  });
 
   test('should get related products from API', async () => {
     const result = await request(app)

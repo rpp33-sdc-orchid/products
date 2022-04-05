@@ -27,12 +27,9 @@ module.exports = {
       })
   },
   getStyles: (req, res) => {
-    // TODO: get product id from req.param?
-    // console.log('req.params?', req.params);
     const productId = req.params.product_id;
     models.getStyles(productId)
       .then((results) => {
-        // TODO: send result to client
         //  console.log('results?', results);
         res.send(results);
       })
