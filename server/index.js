@@ -8,6 +8,7 @@ app.use('/products', router);
 
 app.get('/', (req, res) => {
   console.log('We are in server!');
+  res.send('test');
 });
 
 
