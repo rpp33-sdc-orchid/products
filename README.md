@@ -4,7 +4,7 @@ API service for products
 ## Team
 
   - __Product Owner__: Team Orchid
-  - __Development Team Members__: Dennis Wang, Joe Casey, Yufang Cheng
+  - __Development Team Members__: Team Orchid
 
 ## Technologies
 
@@ -13,15 +13,15 @@ API service for products
 - Test Suite
   - Jest, SuperTest
 - Database
-  - TBD
+  - PostgreSQL
 
 ## Milestones
 
 -   [ ] **Apr 23** Service deploy
 -   [ ] **Apr 16** Stress-test
 -   [ ] **Apr 09** Complete API routes
--   [ ] **Apr 05** Initialize API server
--   [ ] **Mar 24** Initialize DBMS technology
+-   [x] **Apr 05** Initialize API server
+-   [x] **Mar 24** Initialize DBMS technology
 -   [x] **Mar 15** Start developing process
 
 
