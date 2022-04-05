@@ -2,10 +2,8 @@ const models = require('../models');
 
 module.exports = {
   getProductList: (req, res) => {
-    // TODO: get page and count from req.param?
-    // console.log('req.param?', req.params);
-    const page = 1;
-    const count = 5;
+    const page = req.query.page || 1;
+    const count = req.query.count || 5;
     models.getProductList(page, count)
       .then((results) => {
         // console.log('results?', results);
@@ -17,8 +15,7 @@ module.exports = {
       })
   },
   getProduct: (req, res) => {
-    // TODO: get product id from req.param?
-    const productId = 1;
+    const productId = req.params.product_id;
     models.getProduct(productId)
       .then((results) => {
         // console.log('results?', results);
@@ -31,12 +28,13 @@ module.exports = {
   },
   getStyles: (req, res) => {
     // TODO: get product id from req.param?
-    const productId = 1;
+    // console.log('req.params?', req.params);
+    const productId = req.params.product_id;
     models.getStyles(productId)
       .then((results) => {
         // TODO: send result to client
-         console.log('results?', results);
-        // res.send(results);
+        //  console.log('results?', results);
+        res.send(results);
       })
       .catch((err) => {
         console.log('error getting product styles', err);
@@ -44,8 +42,7 @@ module.exports = {
       })
   },
   getRelated: (req, res) => {
-    // TODO: get productId from req.param?
-    const productId = 1;
+    const productId = req.params.product_id;
     models.getRelated(productId)
       .then((results) => {
         // console.log('results?', results);

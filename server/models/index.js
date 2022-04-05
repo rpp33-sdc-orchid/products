@@ -43,7 +43,7 @@ module.exports = {
     });
   },
   getStyles: (productId) => {
-    console.log('product id in style?', productId);
+    // console.log('product id in style?', productId);
     //TODO: write get style route query
     const query = `SELECT row_to_json(t)
     FROM (
@@ -72,8 +72,9 @@ module.exports = {
       return client.query(query, [productId])
         .then((res) => {
           client.release();
-          console.log('style results?', res.rows);
+          // console.log('style results?', res.rows[0].row_to_json);
           // TODO: return results?
+          return res.rows[0].row_to_json;
         })
         .catch((err) => {
           console.log('error executing getStyles query', err);
