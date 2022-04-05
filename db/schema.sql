@@ -28,8 +28,8 @@
 --   style_id SERIAL,
 --   product_id INT NOT NULL,
 --   name TEXT,
---   sale_price TEXT DEFAULT NULL,
---   original_price TEXT DEFAULT NULL,
+--   sale_price TEXT,
+--   original_price TEXT ,
 --   defaults BOOLEAN DEFAULT TRUE,
 --   PRIMARY KEY (style_id)
 -- );
@@ -113,3 +113,16 @@
 -- ALTER TABLE skus ADD FOREIGN KEY (style_id) REFERENCES styles (style_id);
 -- ALTER TABLE features ADD FOREIGN KEY (product_id) REFERENCES products (id);
 -- ALTER TABLE related ADD FOREIGN KEY (product_id) REFERENCES products (id);
+
+-- DROP INDEX idx_style;
+-- DROP INDEX idx_feature;
+-- DROP INDEX idx_related_product;
+-- DROP INDEX idx_photo;
+-- DROP INDEX idx_sku;
+
+-- CREATE INDEX idx_style ON styles(product_id);
+-- CREATE INDEX idx_feature ON features(product_id);
+-- CREATE INDEX idx_related_product ON related(product_id);
+-- CREATE INDEX idx_photo ON photos(style_id);
+-- CREATE INDEX idx_sku ON skus(style_id);
+

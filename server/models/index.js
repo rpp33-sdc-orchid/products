@@ -20,15 +20,15 @@ module.exports = {
   getProduct: (productId) => {
     // console.log('product id in product?', productId);
     const query = `SELECT row_to_json(t) AS products
-          FROM (
-            SELECT products.id, products.name, products.slogan, products.description, products.category, products.default_price,
-              ( SELECT json_agg(row_to_json(fea))
-              FROM (
-                SELECT features.feature, features.value FROM features WHERE features.product_id = products.id
-              ) fea
-            ) AS features
-            FROM products WHERE products.id = $1
-          ) t`;
+    FROM (
+      SELECT products.id, products.name, products.slogan, products.description, products.category, products.default_price,
+        ( SELECT json_agg(row_to_json(fea))
+        FROM (
+          SELECT features.feature, features.value FROM features WHERE features.product_id = products.id
+        ) fea
+      ) AS features
+      FROM products WHERE products.id = $1
+    ) t`;
 
     return pool.connect().then((client) => {
       return client.query(query, [productId])
@@ -45,7 +45,28 @@ module.exports = {
   getStyles: (productId) => {
     console.log('product id in style?', productId);
     //TODO: write get style route query
-    const query = ``
+    const query = `SELECT row_to_json(t)
+    FROM (
+      SELECT products.id,
+        ( SELECT json_agg(row_to_json(stl))
+          FROM (
+            SELECT styles.style_id, styles.name, styles.original_price, styles.sale_price, styles.defaults as "defaults?", (
+              SELECT json_agg(row_to_json(pho))
+              FROM (
+                SELECT photos.thumbnail_url, photos.url FROM photos WHERE photos.style_id = styles.style_id
+                ) pho
+              ) AS photos,
+              (
+                SELECT json_agg(row_to_json(sku))
+                FROM (
+                SELECT skus.quantity, skus.size FROM skus WHERE skus.style_id = styles.style_id
+                ) sku
+              ) AS skus
+            FROM styles WHERE styles.product_id = products.id
+          ) stl
+        ) AS results
+      FROM products WHERE products.id = $1
+    ) t`;
 
     return pool.connect().then((client) => {
       return client.query(query, [productId])
