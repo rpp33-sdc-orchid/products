@@ -30,7 +30,19 @@ module.exports = {
     const productId = req.params.product_id;
     models.getStyles(productId)
       .then((results) => {
-        console.log('results?', results);
+        // console.log('results?', results);
+        // console.log('skus?', results.results[0].skus);
+        results.results.forEach((style) => {
+          let resultObj = {};
+          let skusArr = style.skus;
+          skusArr.forEach((sku) => {
+            let eachSkus = {'quantity': 0, 'size': 0};
+            eachSkus.quantity = sku.quantity;
+            eachSkus.size = sku.size;
+            resultObj[sku.skus_id] = eachSkus;
+          })
+          style.skus = resultObj;
+        })
         res.send(results);
       })
       .catch((err) => {

@@ -50,7 +50,7 @@ module.exports = {
       SELECT products.id AS product_id,
         ( SELECT json_agg(row_to_json(stl))
           FROM (
-            SELECT styles.style_id, styles.name, styles.original_price, styles.sale_price, styles.defaults as "defaults?", (
+            SELECT styles.style_id, styles.name, styles.original_price, styles.sale_price, styles.defaults AS "defaults?", (
               SELECT COALESCE(json_agg(row_to_json(pho)), NULL, '[]')
               FROM (
                 SELECT photos.thumbnail_url, photos.url FROM photos WHERE photos.style_id = styles.style_id
@@ -59,7 +59,7 @@ module.exports = {
               (
                 SELECT COALESCE(json_agg(row_to_json(sku)), NULL, '{}')
                 FROM (
-                SELECT skus.quantity, skus.size FROM skus WHERE skus.style_id = styles.style_id
+                SELECT skus.skus_id, skus.quantity, skus.size FROM skus WHERE skus.style_id = styles.style_id
                 ) sku
               ) AS skus
             FROM styles WHERE styles.product_id = products.id
