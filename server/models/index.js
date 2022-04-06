@@ -14,6 +14,7 @@ module.exports = {
         })
         .catch((err) => {
           console.log('error executing getProductList query', err);
+          return err;
         })
     });
   },
@@ -23,10 +24,10 @@ module.exports = {
     FROM (
       SELECT products.id, products.name, products.slogan, products.description, products.category, products.default_price,
         ( SELECT json_agg(row_to_json(fea))
-        FROM (
-          SELECT features.feature, features.value FROM features WHERE features.product_id = products.id
-        ) fea
-      ) AS features
+          FROM (
+            SELECT features.feature, features.value FROM features WHERE features.product_id = products.id
+          ) fea
+        ) AS features
       FROM products WHERE products.id = $1
     ) t`;
 
@@ -39,25 +40,24 @@ module.exports = {
         })
         .catch((err) => {
           console.log('error executing getProduct query', err);
+          return err;
         })
     });
   },
   getStyles: (productId) => {
-    // console.log('product id in style?', productId);
-    //TODO: write get style route query
     const query = `SELECT row_to_json(t)
     FROM (
-      SELECT products.id,
+      SELECT products.id AS product_id,
         ( SELECT json_agg(row_to_json(stl))
           FROM (
             SELECT styles.style_id, styles.name, styles.original_price, styles.sale_price, styles.defaults as "defaults?", (
-              SELECT json_agg(row_to_json(pho))
+              SELECT COALESCE(json_agg(row_to_json(pho)), NULL, '[]')
               FROM (
                 SELECT photos.thumbnail_url, photos.url FROM photos WHERE photos.style_id = styles.style_id
                 ) pho
               ) AS photos,
               (
-                SELECT json_agg(row_to_json(sku))
+                SELECT COALESCE(json_agg(row_to_json(sku)), NULL, '{}')
                 FROM (
                 SELECT skus.quantity, skus.size FROM skus WHERE skus.style_id = styles.style_id
                 ) sku
@@ -73,11 +73,11 @@ module.exports = {
         .then((res) => {
           client.release();
           // console.log('style results?', res.rows[0].row_to_json);
-          // TODO: return results?
           return res.rows[0].row_to_json;
         })
         .catch((err) => {
           console.log('error executing getStyles query', err);
+          return err;
         })
     });
   },
@@ -90,10 +90,15 @@ module.exports = {
         .then((res) => {
           client.release();
           // console.log('related results?', res.rows[0].json_agg);
-          return res.rows[0].json_agg;
+          if(res.rows[0].json_agg) {
+            return res.rows[0].json_agg;
+          } else {
+            return [];
+          }
         })
         .catch((err) => {
           console.log('error executing getRelated query', err);
+          return err;
         })
     });
   }

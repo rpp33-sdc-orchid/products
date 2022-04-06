@@ -30,7 +30,7 @@ module.exports = {
     const productId = req.params.product_id;
     models.getStyles(productId)
       .then((results) => {
-        //  console.log('results?', results);
+        console.log('results?', results);
         res.send(results);
       })
       .catch((err) => {
