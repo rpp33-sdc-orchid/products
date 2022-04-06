@@ -66,21 +66,6 @@ module.exports = {
       FROM products WHERE products.id = $1
     ) t`;
 
-    // SELECT json_object_agg( skus_id, json_build_object('quantity', quantity, 'size', size) )
-    // FROM
-    // skus WHERE skus.style_id = styles.style_id
-
-    // SELECT json_agg(row_to_json(sku))
-    // FROM (
-    //   SELECT skus.skus_id, skus.quantity, skus.size FROM skus WHERE skus.style_id = styles.style_id
-    // ) sku
-    //) AS skus
-
-    // (
-    //   SELECT COALESCE( json_agg(json_build_object( 'id', skus_id, 'quantity', quantity, 'size', size) ), NULL, '{}')
-    //   FROM skus WHERE skus.style_id = styles.style_id
-    // ) AS skus
-
     return pool.connect().then((client) => {
       return client.query(query, [productId])
         .then((res) => {

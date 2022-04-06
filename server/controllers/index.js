@@ -32,16 +32,6 @@ module.exports = {
       .then((results) => {
         // console.log('results?', results);
         // console.log('results?', results.results[0].skus);
-        // results.results.forEach((style) => {
-        //   let result = {};
-        //   style['skus'].forEach((sku) => {
-        //     result[sku.id] = {
-        //       quantity: sku.quantity,
-        //       size: sku.size
-        //     };
-        //   })
-        //   style['skus'] = result;
-        // })
         res.send(results);
       })
       .catch((err) => {
