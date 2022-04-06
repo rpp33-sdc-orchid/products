@@ -35,6 +35,8 @@ describe('Test on API end points', () => {
       .catch((err) => console.log('err on GET/products', err));
 
     expect(result.status).toBe(200);
+    expect(Array.isArray(result._body)).toBe(true);
+    expect(result._body.length).toBeGreaterThan(0);
   });
 
   test('should get product information from API', async () => {
@@ -44,6 +46,8 @@ describe('Test on API end points', () => {
       .catch((err) => console.log('err on GET/products/:product_id', err));
 
     expect(result.status).toBe(200);
+    expect(result._body.id).toBe(testProductId);
+    expect(Array.isArray(result._body.features)).toBe(true);
   });
 
   test('should get styles from API', async () => {
@@ -53,6 +57,8 @@ describe('Test on API end points', () => {
       .catch((err) => console.log('err on GET/products/:product_id/styles', err));
 
     expect(result.status).toBe(200);
+    expect(result._body.product_id).toBe(testProductId);
+    expect(Array.isArray(result._body.results)).toBe(true);
   });
 
   test('should get related products from API', async () => {
@@ -62,6 +68,7 @@ describe('Test on API end points', () => {
       .catch((err) => console.log('err on GET/products/:product_id/related', err));
 
     expect(result.status).toBe(200);
+    expect(Array.isArray(result._body)).toBe(true);
   });
 
 
