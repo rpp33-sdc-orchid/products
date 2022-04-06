@@ -31,18 +31,17 @@ module.exports = {
     models.getStyles(productId)
       .then((results) => {
         // console.log('results?', results);
-        // console.log('skus?', results.results[0].skus);
-        results.results.forEach((style) => {
-          let resultObj = {};
-          let skusArr = style.skus;
-          skusArr.forEach((sku) => {
-            let eachSkus = {'quantity': 0, 'size': 0};
-            eachSkus.quantity = sku.quantity;
-            eachSkus.size = sku.size;
-            resultObj[sku.skus_id] = eachSkus;
-          })
-          style.skus = resultObj;
-        })
+        // console.log('results?', results.results[0].skus);
+        // results.results.forEach((style) => {
+        //   let result = {};
+        //   style['skus'].forEach((sku) => {
+        //     result[sku.id] = {
+        //       quantity: sku.quantity,
+        //       size: sku.size
+        //     };
+        //   })
+        //   style['skus'] = result;
+        // })
         res.send(results);
       })
       .catch((err) => {
