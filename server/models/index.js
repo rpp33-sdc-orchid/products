@@ -48,7 +48,7 @@ module.exports = {
     const query = `SELECT row_to_json(t)
     FROM (
       SELECT products.id AS product_id,
-        ( SELECT json_agg(row_to_json(stl))
+        ( SELECT COALESCE(json_agg(row_to_json(stl)), NULL, '[]')
           FROM (
             SELECT styles.style_id, styles.name, styles.original_price, styles.sale_price, styles.defaults AS "defaults?", (
               SELECT COALESCE(json_agg(row_to_json(pho)), NULL, '[]')

@@ -32,6 +32,9 @@ module.exports = {
       .then((results) => {
         // console.log('results?', results);
         // console.log('results?', results.results[0].skus);
+        // if(!results.results) {
+        //   results.results = [];
+        // }
         res.send(results);
       })
       .catch((err) => {
