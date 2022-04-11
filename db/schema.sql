@@ -52,7 +52,15 @@
 -- );
 
 -- COPY photos (photo_id, style_id, thumbnail_url, url)
--- FROM '/Users/elainecheng/Documents/products/clean_data/photos.csv'
+-- FROM '/Users/elainecheng/Documents/products/clean_data/clean_photo/data1.csv'
+-- WITH DELIMITER ',' CSV HEADER;
+
+-- COPY photos (photo_id, style_id, thumbnail_url, url)
+-- FROM '/Users/elainecheng/Documents/products/clean_data/clean_photo/data2.csv'
+-- WITH DELIMITER ',' CSV HEADER;
+
+-- COPY photos (photo_id, style_id, thumbnail_url, url)
+-- FROM '/Users/elainecheng/Documents/products/clean_data/clean_photo/data3.csv'
 -- WITH DELIMITER ',' CSV HEADER;
 -- -- photos
 
