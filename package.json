@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "combined-stream": "^1.0.8",
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
     "dotenv": "^16.0.0",
