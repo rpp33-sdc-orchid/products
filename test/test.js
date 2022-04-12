@@ -3,17 +3,15 @@ const request = require('supertest');
 const express = require('express');
 const app = express();
 const router = require('../server/router.js');
+const home = process.env.API_URL;
 
 app.use('/products', router);
 
 
 describe('Test on test suite setup', () => {
-  app.get('/', (req, res) => {
-    res.send('test');
-  });
 
   test('should return the message when connect to home page', async () => {
-    const response = await request(app)
+    const response = await request(home)
       .get('/')
       .catch((err) => console.log('err on home page', err));
 
@@ -52,7 +50,7 @@ describe('Test on GET/products API end point', () => {
 
 describe('Test on GET/products/:product_id API end point', () => {
 
-  const testProductId = 1;
+  const testProductId = 100000;
   const errorProductId = 0;
 
   test('should get product information from API', async () => {
@@ -66,11 +64,21 @@ describe('Test on GET/products/:product_id API end point', () => {
     expect(Array.isArray(result._body.features)).toBe(true);
   });
 
+  test('should not get product information from API for invalid id', async () => {
+    const result = await request(app)
+      .get(`/products/hello`)
+      // .set('Authorization', API_KEY)
+      .catch((err) => console.log('err on TEST GET/products/:product_id', err));
+
+    expect(result.status).toBe(500);
+    expect(result.text).toBe('Error getting product info');
+  });
+
 });
 
 describe('Test on GET/products/:product_id/styles API end point', () => {
 
-  const testProductId = 1;
+  const testProductId = 100000;
 
   test('should get styles from API', async () => {
     const result = await request(app)
@@ -83,11 +91,21 @@ describe('Test on GET/products/:product_id/styles API end point', () => {
     expect(Array.isArray(result._body.results)).toBe(true);
   });
 
+  test('should not get style from API for invalid id', async () => {
+    const result = await request(app)
+      .get(`/products/hello/styles`)
+      // .set('Authorization', API_KEY)
+      .catch((err) => console.log('err on TEST GET/products/:product_id/styles', err));
+
+    expect(result.status).toBe(500);
+    expect(result.text).toBe('Error getting product styles');
+  });
+
 });
 
 describe('Test on GET/products/:product_id/related API end point', () => {
 
-  const testProductId = 1;
+  const testProductId = 100000;
   const errorProductId = 0;
 
   test('should get related products from API', async () => {
@@ -109,5 +127,15 @@ describe('Test on GET/products/:product_id/related API end point', () => {
     expect(result.status).toBe(200);
     expect(Array.isArray(result._body)).toBe(true);
     expect(result._body.id).toBeUndefined();
+  });
+
+  test('should not get related product information from API for invalid id', async () => {
+    const result = await request(app)
+      .get(`/products/hello/related`)
+      // .set('Authorization', API_KEY)
+      .catch((err) => console.log('err on TEST GET/products/:product_id/related', err));
+
+    expect(result.status).toBe(500);
+    expect(result.text).toBe('Error getting related product');
   });
 });
