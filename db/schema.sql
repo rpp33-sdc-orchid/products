@@ -128,6 +128,7 @@
 -- DROP INDEX idx_photo;
 -- DROP INDEX idx_sku;
 
+-- CREATE INDEX idx_product ON products(id);
 -- CREATE INDEX idx_style ON styles(product_id);
 -- CREATE INDEX idx_feature ON features(product_id);
 -- CREATE INDEX idx_related_product ON related(product_id);
