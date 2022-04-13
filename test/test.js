@@ -4,9 +4,11 @@ const express = require('express');
 const app = express();
 const router = require('../server/router.js');
 const home = process.env.API_URL;
+const axios = require('axios');
 
 app.use('/products', router);
 
+// test on API endpoint with supertest
 
 describe('Test on test suite setup', () => {
 
@@ -19,7 +21,6 @@ describe('Test on test suite setup', () => {
     expect(response.text).toBe('test');
   });
 });
-
 
 describe('Test on GET/products API end point', () => {
 
@@ -50,7 +51,7 @@ describe('Test on GET/products API end point', () => {
 
 describe('Test on GET/products/:product_id API end point', () => {
 
-  const testProductId = 100000;
+  const testProductId = 100;
   const errorProductId = 0;
 
   test('should get product information from API', async () => {
@@ -78,7 +79,7 @@ describe('Test on GET/products/:product_id API end point', () => {
 
 describe('Test on GET/products/:product_id/styles API end point', () => {
 
-  const testProductId = 100000;
+  const testProductId = 100;
 
   test('should get styles from API', async () => {
     const result = await request(app)
@@ -105,7 +106,7 @@ describe('Test on GET/products/:product_id/styles API end point', () => {
 
 describe('Test on GET/products/:product_id/related API end point', () => {
 
-  const testProductId = 100000;
+  const testProductId = 100;
   const errorProductId = 0;
 
   test('should get related products from API', async () => {
@@ -139,3 +140,58 @@ describe('Test on GET/products/:product_id/related API end point', () => {
     expect(result.text).toBe('Error getting related product');
   });
 });
+
+
+// intergration test with axios
+
+describe('Integration tests', () => {
+  test('should get product lists from /products', async () => {
+    axios({
+      method: 'get',
+      url: 'http://localhost:8000/products',
+      params: {
+        page: 1,
+        count: 5
+      }
+    }).then((result) => {
+      expect(result.status).toBe(200);
+      expect(result.data.length).toBe(5);
+    })
+  });
+
+  test('should get product lists from /products/:product_id', async () => {
+    let productId = 10;
+
+    await axios({
+      method: 'get',
+      url: `http://localhost:8000/products/${productId}`
+    }).then((result) => {
+      expect(result.status).toBe(200);
+      expect(result.data.id).toBe(productId);
+    })
+  });
+
+  test('should get product lists from /products/:product_id/styles', async () => {
+    let productId = 10;
+
+    await axios({
+      method: 'get',
+      url: `http://localhost:8000/products/${productId}/styles`,
+    }).then((result) => {
+      expect(result.status).toBe(200);
+      expect(result.data.product_id).toBe(productId);
+      expect(result.data.results).not.toBeUndefined;
+    })
+  });
+
+  test('should get product lists from /products/:product_id/related', async () => {
+    let productId = 10;
+
+    await axios({
+      method: 'get',
+      url: `http://localhost:8000/products/${productId}/related`,
+    }).then((result) => {
+      expect(result.status).toBe(200);
+    })
+  });
+})
