@@ -3,7 +3,7 @@ import { group, sleep } from 'k6';
 
 export const options = {
   // rps: 10,
-  vus: 100,
+  vus: 1000,
   duration: '30s',
   thresholds: {
     http_req_failed: ['rate<0.01'],
@@ -12,7 +12,7 @@ export const options = {
 };
 
 export default function () {
-  let testProductId = 999999;
+  let testProductId = Math.floor(Math.random() * (1000000 - 900000) + 900000);
 
   const product_url = `http://localhost:8000/products/${testProductId}`;
   http.get(product_url);

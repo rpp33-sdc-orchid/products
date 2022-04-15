@@ -3,7 +3,7 @@ import { group, sleep } from 'k6';
 
 export const options = {
   // rps: 10,
-  vus: 100,
+  vus: 1000,
   duration: '30s',
   thresholds: {
     http_req_failed: ['rate<0.01'],

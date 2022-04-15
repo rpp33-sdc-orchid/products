@@ -11,7 +11,7 @@ API service for products
 - Server
   - Node.js, Express
 - Test Suite
-  - Jest, SuperTest
+  - Jest, SuperTest, K6.io
 - Database
   - PostgreSQL
 
@@ -19,7 +19,7 @@ API service for products
 
 -   [ ] **Apr 23** Service deploy
 -   [ ] **Apr 16** Stress-test
--   [ ] **Apr 09** Complete API routes
+-   [x] **Apr 09** Complete API routes
 -   [x] **Apr 05** Initialize API server
 -   [x] **Mar 24** Initialize DBMS technology
 -   [x] **Mar 15** Start developing process

@@ -16,18 +16,4 @@ pool.on('error', (err, client) => {
 });
 
 
-pool.connect((err, client, release) => {
-  if (err) {
-    return console.log('error acquiring client', err);
-  }
-  client.query('SELECT * FROM products LIMIT 10', (err, result) => {
-    release();
-    if (err) {
-      return console.log('error executing query', err);
-    }
-    // console.log('results?', result.rows);
-    console.log('success connection');
-  })
-});
-
 module.exports = pool;
