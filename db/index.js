@@ -11,9 +11,9 @@ const pool = new Pool({
 });
 
 
-pool.on('error', (err, client) => {
-  console.error('Error acquiring pool:', err);
-});
+// pool.on('error', (err, client) => {
+//   console.error('Error acquiring pool:', err);
+// });
 
 
 module.exports = pool;
