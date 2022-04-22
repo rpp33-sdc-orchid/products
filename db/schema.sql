@@ -40,7 +40,7 @@
 -- -- styles
 
 
--- -- photos
+-- photos
 -- DROP TABLE IF EXISTS photos CASCADE;
 
 -- CREATE TABLE photos (
@@ -62,7 +62,7 @@
 -- COPY photos (photo_id, style_id, thumbnail_url, url)
 -- FROM '/Users/elainecheng/Documents/products/clean_data/clean_photo/data3.csv'
 -- WITH DELIMITER ',' CSV HEADER;
--- -- photos
+-- photos
 
 
 -- -- skus

@@ -75,7 +75,7 @@ writeStream.write(csvStringifier.getHeaderString());
 
 // combine stream
 const combinedStream_2 = CombinedStream.create();
-for (var i = 11; i < 20; i++) {
+for (var i = 10; i < 20; i++) {
   combinedStream_2.append(
     fs.createReadStream(`clean_data/splitcsv2/photos-${i}.csv`)
   );
@@ -104,7 +104,7 @@ writeStream.write(csvStringifier.getHeaderString());
 
 // combine stream
 const combinedStream_3 = CombinedStream.create();
-for (var i = 21; i < 30; i++) {
+for (var i = 20; i < 30; i++) {
   combinedStream_3.append(
     fs.createReadStream(`clean_data/splitcsv2/photos-${i}.csv`)
   );
