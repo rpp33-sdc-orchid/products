@@ -1,4 +1,5 @@
 const models = require('../models');
+const redisClient = require('../redis.js');
 
 module.exports = {
   getProductList: (req, res) => {
