@@ -11,7 +11,7 @@ app.use('/products', router);
 
 app.get('/', (req, res) => {
   console.log('We are in server!');
-  res.send('test');
+  res.send('Welcome to products API!');
 });
 
 
