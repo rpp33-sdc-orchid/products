@@ -17,8 +17,10 @@ API service for products
 
 ## Milestones
 
--   [ ] **Apr 23** Service deploy
--   [ ] **Apr 16** Stress-test
+-   [ ] **May 07** Share with friends
+-   [ ] **Apr 28** Scale the application
+-   [x] **Apr 23** Service deploy
+-   [x] **Apr 16** Stress-test
 -   [x] **Apr 09** Complete API routes
 -   [x] **Apr 05** Initialize API server
 -   [x] **Mar 24** Initialize DBMS technology
