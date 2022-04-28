@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest test.js --coverage",
-    "start": "nodemon server/index.js",
+    "start": "NODE_ENV=production nodemon server/index.js",
     "ETL": "node db/ETL.js",
     "newrelic": "nodemon -r newrelic server/index.js"
   },
