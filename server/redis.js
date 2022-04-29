@@ -39,7 +39,22 @@ module.exports = {
   },
   setProductCache: (id, body) => {
     return client.set(`product_id=${id}`, JSON.stringify(body))
-    .then((result) => console.log('success add to cache'))
+    .then((result) => console.log('success add to product cache'))
+    .catch((err) => {
+      throw err;
+    })
+  },
+  getStyleCache: (id) => {
+    return client.get(`style_product_id=${id}`)
+    .then((result) => {
+      // console.log('cashed????', result);
+      return JSON.parse(result)
+    })
+    .catch(() => null)
+  },
+  setStyleCache: (id, body) => {
+    return client.set(`style_product_id=${id}`, JSON.stringify(body))
+    .then((result) => console.log('success add to style cache'))
     .catch((err) => {
       throw err;
     })
