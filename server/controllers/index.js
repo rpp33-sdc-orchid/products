@@ -1,18 +1,24 @@
 const models = require('../models');
-const { getProductCache, setProductCache, getStyleCache, setStyleCache, getRelatedCache, setRelatedCache } = require('../redis.js');
+const { getListCache, setListCache, getProductCache, setProductCache, getStyleCache, setStyleCache, getRelatedCache, setRelatedCache } = require('../redis.js');
 
 module.exports = {
   getProductList: (req, res) => {
     const page = req.query.page || 1;
     const count = req.query.count || 5;
-    models.getProductList(page, count)
-      .then((results) => {
-        res.send(results);
-      })
-      .catch((err) => {
-        console.log('error getting product list', err);
-        res.status(500).send('Error getting product list');
-      })
+    getListCache(page, count)
+    .then((cached) => {
+      // console.log('cached?', cached);
+      if (cached) return cached;
+      return models.getProductList(page, count)
+    })
+    .then((results) => {
+      setListCache(page, count, results);
+      res.send(results);
+    })
+    .catch((err) => {
+      console.log('error getting product list', err);
+      res.status(500).send('Error getting product list');
+    })
   },
   getProduct: (req, res) => {
     const productId = req.params.product_id;
@@ -52,7 +58,7 @@ module.exports = {
     const productId = req.params.product_id;
     getRelatedCache(productId)
     .then((cached) => {
-      console.log('cached?', cached);
+      // console.log('cached?', cached);
       if (cached) return cached;
       return models.getRelated(productId);
     })
