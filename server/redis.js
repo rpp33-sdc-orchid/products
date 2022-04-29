@@ -58,5 +58,20 @@ module.exports = {
     .catch((err) => {
       throw err;
     })
+  },
+  getRelatedCache: (id) => {
+    return client.get(`related_product_id=${id}`)
+    .then((result) => {
+      // console.log('cashed????', result);
+      return JSON.parse(result)
+    })
+    .catch(() => null)
+  },
+  setRelatedCache: (id, body) => {
+    return client.set(`related_product_id=${id}`, JSON.stringify(body))
+    .then((result) => console.log('success add to related cache'))
+    .catch((err) => {
+      throw err;
+    })
   }
 };
