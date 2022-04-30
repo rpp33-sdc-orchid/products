@@ -2,7 +2,7 @@ const pool = require('../../db/index.js');
 
 module.exports = {
   getProductList: (page = 1, count = 5) => {
-    const query = `SELECT * FROM products WHERE products.id > $1 LIMIT $2`;
+    const query = `SELECT * FROM products WHERE products.id > $1 ORDER BY id ASC LIMIT $2`;
 
     return pool.connect().then((client) => {
       return client.query(query, [page * count - count, count])
