@@ -4,12 +4,8 @@ require('dotenv').config();
 
 
 const client = redis.createClient({
-  // host: process.env.REDIS_HOST,
-  // port: process.env.REDIS_PORT,
-  // password: process.env.REDIS_PASSWORD
+  url: process.env.REDIS_URL
 });
-// const getAsync = promisify(client.get).bind(client);
-// const setAsync = promisify(client.set).bind(client);
 
 client.on('error', (err) => {
   console.log('Redis Client Error', err);
@@ -20,13 +16,6 @@ client.on('ready', () => {
 });
 
 client.connect();
-
-// client.set('productKey', 'productValue');
-// client.get('productKey')
-// .then((value) => {
-//   console.log('value?', value);
-//   client.set('productKey', 'productValue');
-// })
 
 module.exports = {
   getListCache: (page, count) => {
