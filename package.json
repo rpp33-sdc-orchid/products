@@ -7,8 +7,7 @@
     "test": "jest test.js --coverage",
     "start": "NODE_ENV=production nodemon server/index.js",
     "ETL": "node db/ETL.js",
-    "newrelic": "nodemon -r newrelic server/index.js",
-    "PM2": "NODE_ENV=production pm2 start server/index.js"
+    "newrelic": "nodemon -r newrelic server/index.js"
   },
   "repository": {
     "type": "git",
