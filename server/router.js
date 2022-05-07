@@ -2,7 +2,6 @@ const express = require('express');
 const controller = require('./controllers');
 const router = express.Router();
 
-// router.use()
 
 // route for retrieve the list of products
 router.get('/', controller.getProductList);

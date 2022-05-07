@@ -7,7 +7,6 @@ module.exports = {
     const count = req.query.count || 5;
     getListCache(page, count)
     .then((cached) => {
-      // console.log('cached?', cached);
       if (cached) return cached;
       return models.getProductList(page, count)
     })
@@ -24,7 +23,6 @@ module.exports = {
     const productId = req.params.product_id;
     getProductCache(productId)
     .then((cached) => {
-      // console.log('cached?', cached);
       if (cached) return cached;
       return models.getProduct(productId)
     })
@@ -41,7 +39,6 @@ module.exports = {
     const productId = req.params.product_id;
     getStyleCache(productId)
     .then((cached) => {
-      // console.log('cached?', cached);
       if (cached) return cached;
       return models.getStyles(productId);
     })
@@ -58,7 +55,6 @@ module.exports = {
     const productId = req.params.product_id;
     getRelatedCache(productId)
     .then((cached) => {
-      // console.log('cached?', cached);
       if (cached) return cached;
       return models.getRelated(productId);
     })
