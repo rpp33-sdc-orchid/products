@@ -11,15 +11,17 @@ API service for products
 - Server
   - Node.js, Express
 - Test Suite
-  - Jest, SuperTest, K6.io
+  - Jest, SuperTest, K6.io, Loader.io
 - Database
   - PostgreSQL
+- Other techniques
+  - Newrelic, Ngnix, Redis, AWS_EC2, AWS_AMI, PM2
 
 ## Milestones
 
--   [ ] **May 07** Share with friends
--   [ ] **Apr 28** Scale the application
--   [x] **Apr 23** Service deploy
+-   [x] **May 07** Share with friends
+-   [x] **Apr 28** Scale the application
+-   [x] **Apr 23** Service deploy to AWS, Benchmark
 -   [x] **Apr 16** Stress-test
 -   [x] **Apr 09** Complete API routes
 -   [x] **Apr 05** Initialize API server
