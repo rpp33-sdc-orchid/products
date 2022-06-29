@@ -1,10 +1,10 @@
-# products
-API service for products
+# Orchid API - products
+API service for products in a e-commerce website
 
 ## Team
 
-  - __Product Owner__: Team Orchid
-  - __Development Team Members__: Team Orchid
+  - __Product Owner__: Yufang Cheng
+  - __Development Team Members__: Yufang Cheng
 
 ## Technologies
 
